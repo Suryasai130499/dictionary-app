@@ -1,0 +1,17 @@
+.searchField {
+  display: block;
+  width: 100%;
+  color: var(--body-color);
+  background-color: var(--search-bar-bg);
+  padding-block: 0.75em;
+  padding-inline: 1em 2em;
+  margin-block-end: 45px;
+  font-size: clamp(1rem, calc(0.91rem + 0.38vw), 1.25rem);
+  font-weight: 700;
+  line-height: 1;
+  border-radius: 16px;
+}
+
+.searchField::placeholder {
+  font-weight: 700;
+}

@@ -1,0 +1,19 @@
+.wrapper {
+  width: 90%;
+  max-width: 740px;
+  margin-inline: auto;
+  margin-block: 55px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rightSection {
+  height: 100%;
+  align-items: center;
+  display: flex;
+}
+
+.rightSection:first-child {
+  margin-right: 1rem;
+}

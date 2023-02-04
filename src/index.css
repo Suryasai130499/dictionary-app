@@ -1,10 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;500;700&family=Inter:wght@400;500;700&family=Lora:wght@400;500;700&display=swap');
+
 :root {
   --body-bg: #ffffff;
   --body-color: #2d2d2d;
   --primary-color: #a445ed;
   --subHeading-color: #757575;
-  --search-bar-color: #f4f4f4;
+  --search-bar-bg: #f4f4f4;
   --line-color: #e9e9e9;
+  --error-color: #ff5252;
+  --shadow-color: rgba(0 0 0 / 0.1);
+  --dropdown-bg: var(--body-bg);
 }
 
 .dark {
@@ -12,6 +17,47 @@
   --body-color: #ffffff;
   --primary-color: #a445ed;
   --subHeading-color: #757575;
-  --search-bar-color: #1f1f1f;
+  --search-bar-bg: #1f1f1f;
   --line-color: #3a3a3a;
+  --error-color: #ff5252;
+  --shadow-color: var(--primary-color);
+  --dropdown-bg: var(--search-bar-bg);
+}
+
+.sans {
+  font-family: 'Inter', sans-serif;
+}
+
+.serif {
+  font-family: 'Lora', serif;
+}
+
+.mono {
+  font-family: 'Inconsolata', monospace;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  border: 0;
+  outline: 0;
+}
+
+body {
+  min-height: 100vh;
+  background-color: var(--body-bg);
+  color: var(--body-color);
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
