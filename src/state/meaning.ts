@@ -1,8 +1,9 @@
 import { create } from 'zustand';
 
 type Phonetic = {
-  text: string;
+  text?: string;
   audio?: string;
+  sourceUrl?: string;
 };
 
 type Definition = {
@@ -18,76 +19,37 @@ type Mean = {
 };
 
 type Meaning = {
-  word: string;
-  phonetic: string;
-  phonetics: Phonetic[];
-  origin: string;
-  meanings: Mean[];
+  word?: string;
+  phonetic?: string;
+  phonetics?: Phonetic[];
+  origin?: string;
+  meanings?: Mean[];
+  sourceUrls?: string[];
+};
+
+type Error = {
+  message?: string;
+  resolution?: string;
+  title?: string;
 };
 
 type MeaningProps = {
-  meaning: Meaning[];
-  setMeaning: (value: Meaning[]) => void;
+  meaning: Meaning;
+  setMeaning: (value: Meaning) => void;
+  error: Error;
+  setError: (value: Error) => void;
 };
 
 const meaningStore = create<MeaningProps>((set) => ({
-  meaning: [
-    {
-      word: 'hello',
-      phonetic: 'həˈləʊ',
-      phonetics: [
-        {
-          text: 'həˈləʊ',
-          audio:
-            '//ssl.gstatic.com/dictionary/static/sounds/20200429/hello--_gb_1.mp3',
-        },
-        {
-          text: 'hɛˈləʊ',
-        },
-      ],
-      origin:
-        'early 19th century: variant of earlier hollo ; related to holla.',
-      meanings: [
-        {
-          partOfSpeech: 'exclamation',
-          definitions: [
-            {
-              definition:
-                'used as a greeting or to begin a phone conversation.',
-              example: 'hello there, Katie!',
-              synonyms: [],
-              antonyms: [],
-            },
-          ],
-        },
-        {
-          partOfSpeech: 'noun',
-          definitions: [
-            {
-              definition: 'an utterance of ‘hello’; a greeting.',
-              example: 'she was getting polite nods and hellos from people',
-              synonyms: [],
-              antonyms: [],
-            },
-          ],
-        },
-        {
-          partOfSpeech: 'verb',
-          definitions: [
-            {
-              definition: 'say or shout ‘hello’.',
-              example: 'I pressed the phone button and helloed',
-              synonyms: [],
-              antonyms: [],
-            },
-          ],
-        },
-      ],
-    },
-  ],
-  setMeaning: (value: Meaning[]) =>
+  meaning: {},
+  setMeaning: (value: Meaning) =>
     set(() => ({
       meaning: value,
+    })),
+  error: {},
+  setError: (value: Error) =>
+    set(() => ({
+      error: value,
     })),
 }));
 

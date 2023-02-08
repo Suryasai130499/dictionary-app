@@ -1,6 +1,6 @@
-import { FormEvent } from "react";
-import styles from "./index.module.css";
-import searchStore from "../../state/search";
+import { FormEvent } from 'react';
+import styles from './index.module.css';
+import searchStore from '../../state/search';
 
 const SearchField = () => {
   const text = searchStore((state) => state.text);

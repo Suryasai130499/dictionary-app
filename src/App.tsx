@@ -1,6 +1,9 @@
 import { useEffect } from 'react';
 import themeStore from './state/theme';
-// import searchStore from './state/search';
+import searchStore from './state/search';
+import meaningStore from './state/meaning';
+
+import { useDebounce } from 'usehooks-ts';
 
 import Header from './components/header';
 import SearchField from './components/searchField';
@@ -8,30 +11,62 @@ import Meaning from './components/Meaning';
 
 import styles from './App.module.css';
 
-// const baseUrl = 'https://od-api.oxforddictionaries.com/api/v2/words/en-gb';
+const baseUrl = 'https://api.dictionaryapi.dev/api/v2/entries/en/';
 
 function App() {
   const theme = themeStore((state) => state.theme);
   const font = themeStore((state) => state.font);
-  // const text = searchStore((state) => state.text);
+  const text = searchStore((state) => state.text);
+  const setMeaning = meaningStore((state) => state.setMeaning);
+  const setError = meaningStore((state) => state.setError);
 
-  // useEffect(() => {
-  //   const getData = () => {
-  //     fetch(`${baseUrl}?q=${text}`, {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         app_id: 'bc24d434',
-  //         app_key: '4be5b23fe1421644e6c582e944fdf435',
-  //         'access-control-allow-origin': '*',
-  //       },
-  //     })
-  //       .then((res) => res.json())
-  //       .then((data) => console.log(data));
-  //   };
+  const debouncedValue = useDebounce(text, 250);
 
-  //   getData();
-  // }, [text]);
+  useEffect(() => {
+    const getData = () => {
+      fetch(`${baseUrl}hello`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.title) {
+            setError(data);
+            setMeaning({});
+          } else {
+            setMeaning(data[0]);
+            setError({});
+          }
+        });
+    };
+
+    getData();
+  }, []);
+
+  useEffect(() => {
+    const getData = () => {
+      fetch(`${baseUrl}${text}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.title) {
+            setError(data);
+            setMeaning({});
+          } else {
+            setMeaning(data[0]);
+            setError({});
+          }
+        });
+    };
+
+    getData();
+  }, [debouncedValue]);
 
   useEffect(() => {
     if (theme === 'light') {
